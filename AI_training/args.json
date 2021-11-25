@@ -1,0 +1,13 @@
+{
+    "rundir": "C:\\Users\\Joey\\Desktop\\Knee MRI project\\AI_model",
+    "task": "meniscus",
+    "seed": 42,
+    "gpu": false,
+    "learning_rate": 9e-07,
+    "weight_decay": 0.01,
+    "epochs": 75,
+    "max_patience": 5,
+    "factor": 0.3,
+    "backbone": "alexnet",
+    "abnormal_model": null
+}

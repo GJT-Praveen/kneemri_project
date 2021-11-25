@@ -1,0 +1,61 @@
+{%extends "Dhome_base.html"%}{%block patients%}
+<div class="patientsblock"> 
+<div class='patientslist'>
+    <div class="Title">
+        <h2>Patients</h2>
+    </div>
+    <div class='patientstable'>
+        <table>
+            <thead>
+                <tr>
+                    <td>Patient ID</td>
+                    <td>Name</td>
+                    <td>Gender</td>
+                    <td>Phone number</td>
+                    <td>Email</td>
+                    <td>Abnormal</td>
+                    <td>ACL</td>
+                    <td>Meniscus</td>
+                    <td>Download Report</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for row in patients_table%}
+                <tr>
+                    <td>{{row['patientid']}}</td>
+                    <td>{{row['name']}}</td>
+                    <td>{{row['gender']}}</td>
+                    <td>{{row['pnumber']}}</td>
+                    <td>{{row['email']}}</td>
+                    <td>{{row['abnormal']}}</td>
+                    <td>{{row['acl']}}</td>
+                    <td>{{row['meniscus']}}</td>
+                    <td>
+                        <form method='POST' action="/generate_pdf">
+                            <input type='hidden' name='patientid' value="{{row['patientid']}}">
+                            <input type='hidden' name='name' value="{{row['name']}}">
+                            <input type='hidden' name='gender' value="{{row['gender']}}">
+                            <input type='hidden' name='pnumber' value="{{row['pnumber']}}">
+                            <input type='hidden' name='email' value="{{row['email']}}">
+                            <input type='hidden' name='abnormal' value = "{{row['abnormal']}}">
+                            <input type='hidden' name='acl' value="{{row['acl']}}">
+                            <input type='hidden' name='meniscus' value="{{row['meniscus']}}">
+                            <input type='submit' class='Download' value='Download'>
+                        </form>
+                    </td>
+                    <td>
+                        <form method='POST' action='/delete_patient'>
+                            <input type='hidden' name='location' value='patients'>
+                            <input type='hidden' name='patientid' value="{{row['patientid']}}">
+                            <button type='submit' class='delete'><i class='fa fa-minus-circle'></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+</div>
+{%endblock%}

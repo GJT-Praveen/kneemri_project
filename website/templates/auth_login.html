@@ -1,0 +1,25 @@
+{%extends 'auth_base.html'%}{%block title%}Login{%endblock%}
+{%block login%}
+    <div class="center">
+        <h1>Login</h1>
+        <form method="post" action='/login'>
+            <div class="txt_field">
+                <input id="userid" name="userid" type="text" value="" required>
+                <label for="userid">UserID</label>
+            </div>
+            
+            <div class="txt_field">
+                <input id="password" name="password" type="password" value="" required>
+                <label for="password">Password</label>
+            </div>
+
+            <div class="pass">Forgot Password?</div>
+            <div class="submitbutton">
+                <input type="submit"  value="Login">
+            </div>
+            <div class="signup_link">
+                Not a member? <a href="/Sign-up">Signup</a>
+            </div>
+        </form>
+    </div>
+{%endblock%}

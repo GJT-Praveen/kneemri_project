@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type='text/css'>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+            @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+            *{  
+                margin:0;
+                padding:0;
+                box-sizing: border-box;
+                font-family: 'Montserrat',sans-serif;
+            }
+
+            body {
+                overflow-x: hidden;
+                min-height: 100%;
+                height: 100%;
+                width: 100%;
+            }
+
+            .heading{
+                background-color: cadetblue;
+                width:100%;
+                height:200px;
+                color:white;
+                text-align: center;
+                font-size:40px;
+                padding:50px;
+            }
+
+            .Disclaimer{
+                color:red;
+                text-align:center;
+                font-size:30px;
+                margin: 25px;
+            }
+            .Disclaimertext{
+                text-align: center;
+                font-size: 25px;
+            }
+            .report{
+                /* text-align:justify; */
+                font-size:25px;
+                margin-left: 25%;
+                margin-top: 50px;
+            }
+
+            .report p{
+                margin:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='heading'>Intelligent Radiologist Knee Assistant</div>
+        <div class='Disclaimer'>Disclaimer</div>
+        <div class='Disclaimertext'>This report is generated to just assist doctors to diagnoise the knee condition and the doctor's decision will be final</div>
+        <div class='report'>
+        <p>PatiendID &nbsp &nbsp &nbsp &nbsp &nbsp: {{patientid}}</p>
+        <p>Name&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp: {{name}}</p>
+        <p>Email &nbsp &nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp: {{email}}</p>
+        <p>Phonenumber&nbsp : {{pnumber}}</p>
+        <p>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: {{gender}}</p>
+        <p>Abnormal&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: {{abnormal}}</p>
+        <p>Acl &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: {{acl}}</p>
+        <p>meniscus&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: {{meniscus}}</p>
+    </div>
+    </body>
+</html>

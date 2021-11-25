@@ -1,0 +1,145 @@
+{% extends 'Dhome_base.html'%} {%block Dashboard%}
+    
+        <div class="cardBox">
+            <div class="card">
+                <div>
+                    <div class="numbers">{{count1}}</div>
+                    <div class="cardName">Total Knees Cracked</div>
+                </div>
+                <div class="iconBox">
+                <i class="fa fa-bone" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">{{count2}}</div>
+                    <div class="cardName">Patients being treated</div>
+                </div>
+                <div class="iconBox">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">{{count3}}</div>
+                    <div class="cardName">Unread Messages</div>
+                </div>
+                <div class="iconBox">
+                <i class="fa fa-comment-medical" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        <div class= 'details'>
+            <div class="recentPatients">
+                <div class="cardHeader">
+                    <h2>Recent Patients</h2>
+                    <a href="/Dhome_patients" class="btn">View All</a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Patient ID</td>
+                            <td>Name</td>
+                            <td>Gender</td>
+                            <td>Phone number</td>
+                            <td>Email</td>
+                            <td>Download Report</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for row in patients_table%}
+    
+                        <tr>
+                            <td>{{row['patientid']}}</td>
+                            <td>{{row['name']}}</td>
+                            <td>{{row['gender']}}</td>
+                            <td>{{row['pnumber']}}</td>
+                            <td>{{row['email']}}</td>
+                            <td><form method='POST' action="/generate_pdf">
+                                <input type='hidden' name='patientid' value="{{row['patientid']}}">
+                                <input type='hidden' name='name' value="{{row['name']}}">
+                                <input type='hidden' name='gender' value="{{row['gender']}}">
+                                <input type='hidden' name='pnumber' value="{{row['pnumber']}}">
+                                <input type='hidden' name='email' value="{{row['email']}}">
+                                <input type='hidden' name='abnormal' value = 'Yes'>
+                                <input type='hidden' name='acl' value='Yes'>
+                                <input type='hidden' name='meniscus' value='Yes'>
+                                <input type='submit' class='Download' value='Download'>
+                            </form></td>
+                            <td>
+                                <form method='POST' action="/delete_patient">
+                                    <input type='hidden' name='location' value='dashboard'>
+                                    <input type='hidden' name='patientid' value="{{row['patientid']}}"> 
+                                    <button type='submit'class='delete'><i class='fa fa-minus-circle'></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div class="addpatient">
+                <div class="cardHeader2">
+                    <h2>Add Patient</h2>
+                </div>
+                <form method="POST" id="addpatientform" action='/add_patient' enctype="multipart/form-data">
+                    <input type='hidden' name='doctorid' value={{user.userid}}>
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="inputname">Full Name</span>
+                            <input type="text" name ="name" placeholder="Enter patient's name" min-length="3" required>
+                            
+                        </div>
+                        <div class="input-box">
+                            <span class="inputname">PatientID</span>
+                            <input type="text" name="patientid"placeholder="Enter the PatientID" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="inputname">Email</span>
+                            <input type="email" name="email" id="email" placeholder="Enter patient's email" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="inputname">Phone Number</span>
+                            <input type="text" name="pnumber" placeholder="Enter patient's Phone number" required>
+                        </div>
+                    </div>
+                    <div id="gender-details" class="gender-details">
+                        <input type="radio" name="gender" value="Male"id="dot-1">
+                        <input type="radio" name="gender" value="Female"id="dot-2">
+                        <input type="radio" name="gender" value="Non-Binary"id="dot-3">
+                        <span class="gender-title">Gender</span>
+                        <div class="category">
+                            <label for="dot-1">
+                                <span class="dot one"></span>
+                                <span class="gender">Male</span>
+                            </label>
+                            <label for="dot-2">
+                                <span class="dot two"></span>
+                                <span class="gender">Female</span>
+                            </label>
+                            <label for="dot-3">
+                                <span class=" dot three"></span>
+                                <span class="gender">Non-Binary</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="fileinput">Axial Scan</span>
+                        <input type='file' name='axi_scan' class="upload-box">
+                    </div>
+                    <div>
+                        <span class="fileinput">coronal Scan</span>
+                        <input type='file' name='cor_scan' class="upload-box">
+                    </div>
+                    <div>
+                        <span class="fileinput">Sagittal Scan</span>
+                        <input type='file' name='sag_scan' class="upload-box">
+                    </div>
+                    <div class="button">
+                        <input type="submit"  value="Register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{%endblock%}

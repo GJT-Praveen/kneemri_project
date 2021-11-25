@@ -1,0 +1,205 @@
+<!-- <h1>This is Patient Dashboard</h1> -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title> Dashboard </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a2fd29fbf4.js" crossorigin="anonymous"></script>
+        <!-- <link rel='stylesheet' href='../static/css/dhome.css'> -->
+        <link rel="stylesheet" href="../static/css/phome.css">
+
+    </head>
+    <body>
+        <div class="">
+            <div class="navigation active">
+                <ul>
+                    <li>
+                        <a href="/Phome">
+                            <span class="icon"><i class="fa fa-home" aria-hidden='true'></i></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="/Phome_messages">
+                        <span class="icon"><i class="fa fa-comment" aria-hidden='true'></i></span>
+                        <span class="title">Messages</span>
+                        </a>
+                    </li> -->
+                    <!-- <li>
+                        <a href="#">
+                        <span class="icon"><i class="fa fa-question-circle" aria-hidden='true'></i></span>
+                        <span class="title">Help</span>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="#">
+                        <span class="icon"><i class="fa fa-lock" aria-hidden='true'></i></span>
+                        <span class="title">Password</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Phome_settings">
+                        <span class="icon"><i class="fa fa-cog" aria-hidden='true'></i></span>
+                        <span class="title">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                        <span class="icon"><i class="fa fa-sign-out" aria-hidden='true'></i></span>
+                        <span class="title">Signout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div> 
+        <div class="main active">
+            <div class="topbar">
+                <div class="toggle active" onclick = "toggle_menu();"></div>
+                <img class="logo" src="../static/imgs/ineuron-logo.png"></a>
+                <div class="user">
+                    <img src="../static/imgs/usericon.png">
+                </div>
+            </div>
+
+        {% with messages = get_flashed_messages(with_categories=true)%}
+        {% if messages %}
+            {%for category,message in messages %}
+            {%if category=='error'%}
+                <div class="erroralert show showAlert">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">{{message}}</span>
+                    <div class="close-btn">
+                        <span class="fas fa-times"></span>
+                    </div>
+                </div>
+            {%else%}
+                <div class="successalert show showAlert">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">{{message}}</span>
+                    <div class="close-btn">
+                        <span class="fas fa-check"></span>
+                    </div>
+                </div>
+                
+            {%endif%}
+            {%endfor%}
+        {%endif%}
+        {%endwith%}
+
+        {%block Dashboard%}
+        <div class='phomeblock'>
+            <div class='container1'>
+                <div class='conimage'></div>
+                <div class='context'>
+                    <h1>Got your MRI scan done?</h1>
+                    <p>If you have received your MRI exam images, upload them below. We will have our AI take a look at them and predict your results.</p>
+                    <p>Unfortunately if you dont have them, please wait untill your doctor upload your results or you can contact him below.</p>
+                    <p> Thank you for choosing us.</p>
+                </div>
+                      
+            </div>
+            {%if report_ready=='Yes'%}
+            <div class='container2'>
+                <span>Your doctor has uploaded your MRI scans and your report is ready!</span>
+                <!-- <span>Click the button to download it</span> -->
+                <form method='POST' action="/generate_pdf">
+                    <input type='hidden' name='patientid' value="{{user.userid}}">
+                    <input type='hidden' name='name' value="{{user.name}}">
+                    <input type='hidden' name='gender' value="{{user.gender}}">
+                    <input type='hidden' name='pnumber' value="{{user.pnumber}}">
+                    <input type='hidden' name='email' value="{{user.email}}">
+                    <input type='hidden' name='abnormal' value = "{{abnormal}}">
+                    <input type='hidden' name='acl' value="{{acl}}">
+                    <input type='hidden' name='meniscus' value="{{meniscus}}">
+                    <input type='submit' class='Download' value='Download'>
+                </form>
+            </div>
+            {%endif%}
+            <div class='container3'>
+                <div class='fileupload'>
+                    <h1>Upload Your Scan Images</h1>
+                    <form method='POST' action='/submit_patient_generate_pdf' enctype="multipart/form-data">
+                        <input type='hidden' name='patientid' value="{{user.userid}}">
+                        <input type='hidden' name='name' value="{{user.name}}">
+                        <input type='hidden' name='gender' value="{{user.gender}}">
+                        <input type='hidden' name='pnumber' value="{{user.pnumber}}">
+                        <input type='hidden' name='email' value="{{user.email}}">
+                        <div>
+                            <span>Axial scan</span>
+                            <input type='file' name='axi_scan' class='uploadbox'>
+                        </div>
+                        <div>
+                            <span>Coronal scan</span>
+                            <input type='file' name='cor_scan' class='uploadbox'>
+                        </div>
+                        <div>
+                            <span>Sagittal scan</span>
+                            <input type='file' name='sag_scan' class='uploadbox'>
+                        </div>
+                        <div>
+                            <input type='submit' class='submitbutton'> 
+                        </div>
+                    </form>
+                </div>
+                <div class='message'>
+                    <h1>Consult Your Doctor</h1>
+                    <form method='POST' action='/send_message'>
+                        <input type='hidden' name='patientid' value="{{user.userid}}">
+                        <input type='text'id='doctorid' name='doctorid' placeholder="Enter the doctor's ID">
+                        <textarea rows='5' columns='100' id='message' name='message' placeholder='Enter the message'></textarea>
+                        <input type='submit'value='Send'> 
+                    </form>
+                </div>
+            </div>
+        </div>
+        {%endblock%}
+        <div class="">
+            {%block messages%}{%endblock%}
+        </div>
+        <div class="settingsblock">
+            {%block settings%}{%endblock%}
+        </div>
+        </div>
+
+
+            
+
+
+
+
+        <script>
+            function toggle_menu(){
+                let toggle = document.querySelector('.toggle');
+                let navigation = document.querySelector(".navigation");
+                let main = document.querySelector('.main');
+                
+                toggle.classList.toggle('active');
+                navigation.classList.toggle('active');
+                main.classList.toggle('active');  
+            }
+            setTimeout(function(){
+                $('.erroralert').removeClass("show");
+                $('.erroralert').addClass("hide");
+                },2000);
+            setTimeout(function(){
+                $('.successalert').removeClass("show");
+                $('.successalert').addClass("hide");
+                },2000);
+            $('.close-btn').click(function(){
+                $('.erroralert').removeClass("show");
+                $('.erroralert').addClass("hide");
+                $('.successalert').removeClass("show");
+                $('.successalert').addClass("hide");
+              });
+        </script>
+
+    </body>
+
+</html>

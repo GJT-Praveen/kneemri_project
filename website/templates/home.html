@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name='viewport' content="width=device-width, initial-scale=1"/>
+        <!-- <style>a{color: white;}</style> -->
+       
+        <!-- <link rel="stylesheet" href="../static/css/styles.css"/>
+        <link rel="stylesheet" href="../static/css/colors.css"/> -->
+
+        <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"/>
+        <link rel="stylesheet" href="../static/css/base.css"/>
+
+        <title>{% block title %}Home{% endblock %}</title>
+    </head>
+    <body>
+        <div id="home">
+            <header>
+                <img class="logo" src="../static/imgs/ineuron-logo.png"></a>
+                <nav class="">
+                <ul class="nav_links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="buttons">
+                <a href="/login" id="login"><button>SignIn</button></a>
+                <a href="/Sign-up" id="signup"><button>SignUp</button></a>
+            </div>
+            </header> 
+        </div>
+
+
+        <section id="section1">
+            <div id="jumbotron">
+                <h1 class="welcome">Welcome!</h1>
+             </div>
+        </section>
+        <section id="section2">
+        <div id="img"></div>
+        <div id="textbox"><h2>Let The AI Crack your Knees</h2>
+            <p>Are you a Doctor who wants to have an assist to diagnoise the knee problem?
+                Are you that anxious patient who is waiting for your test results?
+                We bring you this AI powered assist to help you understand your knee condition.
+            </p>
+            <a href="/login" id="getstarted"><button>Get Started</button></a>
+        </div>
+        </section>
+
+        
+        
+
+        
+
+
+
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script
+        type="text/javascript"
+        src="{{ url_for('static', filename='index.js') }}"></script>
+
+    </body>
+
+
+
+
+</html>
